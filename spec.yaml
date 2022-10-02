@@ -1,1 +1,32 @@
-
+openapi 3.0.0
+info:
+  title: Reward Points API
+  description: Checks if user has sufficient number of reward points to redeem on coffee item, then reduces total price accordingly.
+  version: 0.0.1
+ 
+ paths:
+  /users:
+    get:
+      summary: Returns a list of reward items
+      description: This only returns the list of reward items that the user has enough points for.
+      parameters:
+        - in: path
+          name: userPoints
+          schema:
+            type: integer
+          required: true
+          description: Number of reward points user has
+      responses:
+        '200':
+          description: A JSON array of reward items
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  type: string
+                  example: Cuban latte
+        '404':
+          description: No valid reward items exist (not found)
+          
+                  
