@@ -5,7 +5,7 @@ info:
   version: 0.0.1
  
  paths:
-  /users:
+  /users/{userID}:
     get:
       summary: Returns a list of reward items
       description: This only returns the list of reward items that the user has enough points for.
@@ -28,5 +28,27 @@ info:
                   example: Cuban latte
         '404':
           description: No valid reward items exist (not found)
-          
-                  
+    post:
+      summary: Creates view of rewards available to the user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+      responses:
+        '201':
+          description: A new view of the reward items available has been created.
+        '402':
+          description: Menu failed to be created!
+    delete:
+      summary: Deletes the view of available rewards
+      responses:
+      '202': 
+        description: Delete view of rewards created by get
+      '402':
+        description: Reward menu failed to delete!
+      '404':
+        description: No reward menu found to delete! 
